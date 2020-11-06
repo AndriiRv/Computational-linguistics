@@ -1,0 +1,32 @@
+#idea files
+.idea/
+*.iml
+
+#js dev-files
+**/node_modules/
+**/vue-bundles/
+**/.storybook-static/
+
+# gradle build
+.gradle
+**/build/
+**/build-node/
+
+# idea build
+**/out/
+
+# deprecated
+*.war
+*.log
+**/classes/
+**/RTS_INDEX/
+
+Thumbs.db
+git.properties
+nodejs-dev.properties
+
+**/repo/
+**/logs/
+**/generated-src/
+
+!.idea/runConfigurations/*
