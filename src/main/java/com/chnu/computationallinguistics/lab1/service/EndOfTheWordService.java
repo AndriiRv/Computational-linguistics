@@ -1,11 +1,14 @@
 package com.chnu.computationallinguistics.lab1.service;
 
+import org.springframework.stereotype.Service;
+
 import java.util.HashSet;
 import java.util.Set;
 
+@Service
 class EndOfTheWordService {
 
-    static Set<String> getEndOfTheWord() {
+    Set<String> getEndOfTheWord() {
         Set<String> endOfTheWords = new HashSet<>();
         endOfTheWords.add("а");
         endOfTheWords.add("и");
