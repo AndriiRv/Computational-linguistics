@@ -9,10 +9,10 @@ import java.util.stream.Collectors;
 
 @Service
 public class ZipfsLawCalculateService {
-    private final EndOfTheWordService endOfTheWordService;
+    private final ParseService parseService;
 
-    public ZipfsLawCalculateService(EndOfTheWordService endOfTheWordService) {
-        this.endOfTheWordService = endOfTheWordService;
+    public ZipfsLawCalculateService(ParseService parseService) {
+        this.parseService = parseService;
     }
 
     Map<WordInVocabulary, ZipfsLaw> getVocabularyWithNumerationWord(String textContent) {
@@ -59,7 +59,7 @@ public class ZipfsLawCalculateService {
     }
 
     private Map<String, Integer> calculateFrequency(String textContent) {
-        List<String> strings = parseText(textContent);
+        List<String> strings = parseService.parseText(textContent);
         Map<String, Integer> map = new HashMap<>();
 
         for (String string : strings) {
@@ -70,57 +70,5 @@ public class ZipfsLawCalculateService {
             }
         }
         return map;
-    }
-
-    private List<String> parseText(String textContent) {
-        List<String> result = new ArrayList<>();
-
-        char[] chars = textContent.toCharArray();
-        String[] arrayOfStrings = convertCharArrayToStringArray(chars);
-
-        StringBuilder word = new StringBuilder();
-
-        Set<String> endOfTheWords = endOfTheWordService.getEndOfTheWord();
-
-        for (int i = 0; i < arrayOfStrings.length; i++) {
-            if (arrayOfStrings[i].matches("[a-zA-Zа-яА-Яії]+")) {
-                word.append(arrayOfStrings[i]);
-            } else if (!word.toString().isBlank()) {
-                setWordToList(result, word, endOfTheWords);
-            }
-            if (i == arrayOfStrings.length - 1) {
-                setWordToList(result, word, endOfTheWords);
-            }
-        }
-        return result;
-    }
-
-    private void setWordToList(List<String> result, StringBuilder word, Set<String> endOfTheWords) {
-        if (word.length() <= 3) {
-            result.add(word.toString());
-            word.setLength(0);
-        } else {
-            String wordWithoutEnding = excludeEndingInWord(word, endOfTheWords);
-            result.add(wordWithoutEnding);
-            word.setLength(0);
-        }
-    }
-
-    private String excludeEndingInWord(StringBuilder word, Set<String> endOfTheWords) {
-        String currentWord = word.toString();
-        for (String end : endOfTheWords) {
-            if (currentWord.endsWith(end)) {
-                return currentWord.substring(0, currentWord.indexOf(end));
-            }
-        }
-        return currentWord;
-    }
-
-    private String[] convertCharArrayToStringArray(char[] array) {
-        String[] result = new String[array.length];
-        for (int i = 0; i < array.length; i++) {
-            result[i] = String.valueOf(array[i]).toLowerCase();
-        }
-        return result;
     }
 }
