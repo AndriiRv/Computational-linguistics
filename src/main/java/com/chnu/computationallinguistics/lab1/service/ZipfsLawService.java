@@ -4,11 +4,12 @@ import com.chnu.computationallinguistics.lab1.model.WordInVocabulary;
 import com.chnu.computationallinguistics.lab1.model.ZipfsLaw;
 import org.springframework.stereotype.Service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.*;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class ZipfsLawService {
@@ -24,7 +25,7 @@ public class ZipfsLawService {
             StringBuilder content = new StringBuilder();
 
             File file = new File(pathToTxtFile);
-            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8))) {
                 String line;
                 while ((line = bufferedReader.readLine()) != null) {
                     content.append(line);
