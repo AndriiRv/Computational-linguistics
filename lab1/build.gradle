@@ -1,0 +1,25 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group 'com.chnu.computationallinguistics'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    implementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation 'org.springframework.boot:spring-boot-test-autoconfigure'
+    implementation 'org.testng:testng:7.0.0'
+    implementation 'org.mockito:mockito-all:1.10.19'
+}

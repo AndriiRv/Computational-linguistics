@@ -1,7 +1,7 @@
 package com.chnu.computationallinguistics.lab1.service;
 
-import com.chnu.computationallinguistics.lab1.model.WordInVocabulary;
 import com.chnu.computationallinguistics.lab1.model.ZipfsLaw;
+import com.chnu.computationallinguistics.lab1.model.WordInVocabulary;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
